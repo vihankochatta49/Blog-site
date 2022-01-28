@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog site</title>
+
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      body {
+        font-family: sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .cont {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%) !important;
+        border-radius: 10px;
+      }
+
+      .mssg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        background: #1b324f;
+        color: white;
+        font-size: 25px;
+        width: 25%;
+        text-align: center;
+        height: 555px;
+      }
+
+      .form {
+        width: 50%;
+      }
+
+      form {
+        max-width: 500px;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        margin: auto;
+      }
+
+      .error {
+        color: red;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+
+      label {
+        font-size: 2rem;
+        margin-top: 15px;
+      }
+
+      .head2 {
+        text-align: center;
+        color: black;
+        font-size: 3rem;
+        font-weight: 500;
+        margin-top: 30px;
+      }
+
+      .write {
+        padding: 8px;
+        max-width: 100%;
+        border: 2px solid #7a7893;
+        border-radius: 8px;
+        font-size: 1.5rem;
+        margin-top: 5px;
+      }
+
+      #description,
+      #markdown {
+        height: 250px;
+      }
+
+      .btns {
+        display: flex;
+        margin-top: 10px;
+      }
+
+      .btn {
+        font-size: 1.5em;
+        padding: 10px;
+        background-color: #4267b2;
+        color: white;
+        border: 2px solid white;
+        border-radius: 8px;
+        margin: 10px 0px;
+      }
+
+      .btn:hover {
+        background-color: rgb(16, 90, 16);
+      }
+
+      .btn-cancel {
+        font-size: 1.5em;
+        padding: 10px;
+        background-color: grey;
+        color: white;
+        border: 2px solid white;
+        border-radius: 8px;
+        margin-top: 10px;
+        margin-left: 10px;
+      }
+
+      .btn-cancel:hover {
+        background-color: red;
+      }
+
+      .anchor {
+        text-decoration: none;
+        color: white;
+      }
+
+      .google {
+        background-color: #189940;
+        text-decoration: none;
+        padding: 15px;
+        border-radius: 30px;
+        color: white;
+        font-size: 25px;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .exist {
+        display: none;
+      }
+
+      @media screen and (max-width: 640px) {
+        body {
+          height: 100%;
+        }
+
+        .cont {
+          flex-direction: column;
+          margin-top: 30px;
+        }
+
+        .mssg {
+          flex-direction: row;
+          height: 50px;
+          width: 100%;
+        }
+
+        .mssg h1 {
+          font-size: 1.2rem !important;
+        }
+
+        .form {
+          width: 100%;
+        }
+
+        label {
+          font-size: 1.5rem;
+        }
+
+        .write {
+          font-size: 1.2rem;
+        }
+
+        .already {
+          display: none;
+        }
+
+        .google {
+          font-size: 14px;
+          width: 70%;
+        }
+
+        form {
+          margin: 10px;
+          padding: 0px;
+        }
+
+        .exist {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cont">
+      <div class="mssg">
+        <h1 style="font-size: 2.2rem; font-family: monospace">Blog Site</h1>
+        <h1 style="font-weight: 500; font-size: 2.5rem">Welcome!</h1>
+        <div class="already">
+          <p style="font-size: 20px">Don't have an account!</p>
+          <br />
+          <!-- Sign-up button -->
+          <a
+            href="/register"
+            class="log"
+            style="
+              border: 2px solid white;
+              border-radius: 5px;
+              padding: 5px;
+              color: white;
+              text-decoration: none;
+            "
+          >
+            Sign-up
+          </a>
+        </div>
+      </div>
+      <div class="form">
+        <!-- login form -->
+        <form action="/login" method="POST">
+          <!--error and success messages-->
+          <% if(typeof errors != 'undefined') {%>
+          <%errors.forEach(function(error) {%>
+          <p class="msg" style="color: yellow"><%=error.msg %></p>
+          <%});%> <% } %> <% if(success_msg != '') {%>
+          <!--flash success message-->
+          <p class="msg" style="color: green"><%=success_msg %></p>
+          <% } %> <% if(error_msg != '') {%>
+          <!--flash error message-->
+          <p class="msg" style="color: red"><%=error_msg %></p>
+          <% } %> <% if(error != '') {%>
+          <p class="msg" style="color: red"><%=error %></p>
+          <% } %>
+
+          <!-- email -->
+          <label for="email">User name:</label>
+          <input type="text" class="write" name="email" id="email" required />
+          <!-- password -->
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            class="write"
+            name="password"
+            id="password"
+            required
+          />
+
+          <!-- buttons -->
+          <div class="btns">
+            <button class="btn" type="submit">Login</button>
+          </div>
+          <p style="margin: auto; font-size: 25px; color: #7a7893">OR</p>
+          <!-- authenticate with google -->
+          <a class="google" href="/auth/google"
+            ><i class="fab fa-google" style="margin-right: 10px"></i> continue
+            with GOOGLE</a
+          >
+          <!-- don't have account -->
+          <p
+            class="exist"
+            style="font-size: 1.1rem; text-align: center; margin-top: 10px"
+          >
+            Don't have a account?
+            <a href="/register"><strong>Sign-up</strong></a>
+          </p>
+        </form>
+      </div>
+    </div>
+    <!-- script for clearing flash/error messages-->
+    <script>
+      const clear = () => {
+        var errors = document.querySelectorAll(".msg");
+        errors.forEach((e) => (e.style.display = "none"));
+      };
+      setTimeout(clear, 5000);
+    </script>
+  </body>
+</html>
