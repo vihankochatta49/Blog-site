@@ -26,7 +26,7 @@ app.use(methodOverride("_method"));
 
 // Connecting with database
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/blogs")
+  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/blogsite")
   .then(() => console.log("Connection successful..."))
   .catch((err) => console.log(err));
 

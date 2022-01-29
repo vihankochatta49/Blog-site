@@ -18,10 +18,7 @@ const schema = new mongoose.Schema({
   likes: { type: Number, default: 0 },
   roomName: String,
   //for image
-  filename: {
-    type: String,
-    unique: true,
-  },
+  filename: String,
   contentType: String,
   imageBase64: String,
 });
